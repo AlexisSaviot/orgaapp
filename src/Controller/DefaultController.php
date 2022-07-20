@@ -3,15 +3,30 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Json;
 
 class DefaultController extends AbstractController
 {
-    #[Route('/api/default', name: 'app_default')]
-    public function index(): JsonResponse
+    #[Route('/', name: 'app_home')]
+    public function index(): Response
     {
-        return $this->json(['message' => 'coucou']);
+        return $this->render('default/index.html.twig', 
+        [
+            'controller_name' => 'DefaultController',
+            'prenom' => 'Alexis',
+        ]
+    );
+    }
+
+    #[Route('/contact', name: 'app_contact')]
+    public function contact(): Response
+    {
+        return $this->render('default/contact.html.twig', 
+        [
+            'controller_name' => 'DefaultController',
+            'mail' => 'alexis.saviot@gmail.com',
+        ]
+    );
     }
 }
